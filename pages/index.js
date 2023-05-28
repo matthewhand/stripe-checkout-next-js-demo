@@ -14,7 +14,7 @@ export default function Home() {
 
   const [item, setItem] = useState({
     name: "Cash Donation",
-    description: "Latest Cash Donation.",
+    description: "Buy me a coffee.",
     image:
       "/public/human_ai_conflict.png",
     quantity: 0,

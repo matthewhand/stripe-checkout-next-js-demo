@@ -114,7 +114,7 @@ export default function Home() {
           className="block text-blue-500 mt-4"
           href="https://cb-ashik.hashnode.dev/stripe-checkout-with-nextjs"
         >
-          Read Blog
+          Built with ChatGPT + Noteable plugin
         </a>
         <div className="bg-yellow-100 text-yellow-700 p-2 mt-2 rounded border mb-2 border-yellow-700">
           Use test card for testing.

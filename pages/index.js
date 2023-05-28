@@ -16,7 +16,7 @@ export default function Home() {
     name: "Cash Donation",
     description: "Buy me a coffee.",
     image:
-      "/public/human_ai_conflict.png",
+      "/human_ai_conflict.png",
     quantity: 0,
     price: 999,
   });

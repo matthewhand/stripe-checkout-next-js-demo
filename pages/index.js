@@ -14,7 +14,7 @@ export default function Home() {
 
   const [item, setItem] = useState({
     name: "Cash Donation",
-    description: "Buy me a coffee.",
+    description: "Donate me a coffee.",
     image:
       "/human_ai_conflict.png",
     quantity: 0,
@@ -107,7 +107,7 @@ export default function Home() {
             onClick={createCheckOutSession}
             className="bg-blue-500 hover:bg-blue-600 text-white block w-full py-2 rounded mt-2 disabled:cursor-not-allowed disabled:bg-blue-100"
           >
-            {loading ? "Processing..." : "Buy"}
+            {loading ? "Processing..." : "Donate"}
           </button>
         </div>
         <a

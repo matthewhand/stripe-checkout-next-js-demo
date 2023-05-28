@@ -13,8 +13,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const [item, setItem] = useState({
-    name: "Apple AirPods",
-    description: "Latest Apple AirPods.",
+    name: "Cash Donation",
+    description: "Latest Cash Donation.",
     image:
       "https://github.com/matthewhand/stripe-payment/raw/main/human_ai_conflict.png",
     quantity: 0,

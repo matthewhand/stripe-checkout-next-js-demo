@@ -16,7 +16,7 @@ export default function Home() {
     name: "Cash Donation",
     description: "Latest Cash Donation.",
     image:
-      "https://github.com/matthewhand/stripe-payment/raw/main/human_ai_conflict.png",
+      "/public/human_ai_conflict.png",
     quantity: 0,
     price: 999,
   });

@@ -7,3 +7,5 @@
   align-items: center;
   height: 100vh;
 }
+
+.image-container { position: relative; width: 100%; padding-bottom: 75%; } .image-container img { position: absolute; width: 100%; height: 100%; }

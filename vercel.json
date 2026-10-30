@@ -1,8 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
-    "deploymentEnabled": {
-      "fix/critical-checkout-20261031": false
-    }
+    "deploymentEnabled": false
   }
 }

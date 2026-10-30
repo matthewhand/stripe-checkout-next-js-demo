@@ -6,10 +6,14 @@ export default async function CreateStripeSession(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const baseUrl = process.env.CHECKOUT_BASE_URL ||
+    (process.env.NODE_ENV === 'production' ? null : 'http://localhost:3000');
+  if (!baseUrl) {
+    return res.status(503).json({ error: 'Checkout is not configured' });
+  }
+
   let params;
   try {
-    const baseUrl = process.env.CHECKOUT_BASE_URL ||
-      (process.env.NODE_ENV === 'production' ? null : 'http://localhost:3000');
     params = buildCheckoutParams(req.body, baseUrl);
   } catch {
     return res.status(400).json({ error: 'Invalid checkout request' });

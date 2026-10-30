@@ -1,38 +1,29 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { buildCheckoutParams } = require('../../lib/checkout-params');
 
-async function CreateStripeSession(req, res) {
-  const { item } = req.body;
+export default async function CreateStripeSession(req, res) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-  const redirectURL =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : 'https://stripe-checkout-next-js-demo.vercel.app';
+  let params;
+  try {
+    const baseUrl = process.env.CHECKOUT_BASE_URL ||
+      (process.env.NODE_ENV === 'production' ? null : 'http://localhost:3000');
+    params = buildCheckoutParams(req.body, baseUrl);
+  } catch {
+    return res.status(400).json({ error: 'Invalid checkout request' });
+  }
 
-  const transformedItem = {
-    price_data: {
-      currency: 'usd',
-      product_data: {
-        images: [item.image],
-        name: item.name,
-      },
-      unit_amount: item.price * 100,
-    },
-    description: item.description,
-    quantity: item.quantity,
-  };
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return res.status(503).json({ error: 'Checkout is not configured' });
+  }
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: [transformedItem],
-    mode: 'payment',
-    success_url: redirectURL + '?status=success',
-    cancel_url: redirectURL + '?status=cancel',
-    metadata: {
-      images: item.image,
-    },
-  });
-
-  res.json({ id: session.id });
+  try {
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+    const session = await stripe.checkout.sessions.create(params);
+    return res.status(200).json({ id: session.id });
+  } catch {
+    return res.status(502).json({ error: 'Unable to create checkout session' });
+  }
 }
-
-export default CreateStripeSession;

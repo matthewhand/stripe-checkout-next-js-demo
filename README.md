@@ -32,3 +32,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Secure local checkout configuration
+
+Requires Node.js 20 or later and npm. Use npm ci and npm test; the
+previous Yarn lockfile was replaced with an npm lockfile during the
+critical security update. Copy the following placeholders into
+.env.local for local Stripe test mode only:
+
+    STRIPE_SECRET_KEY=sk_test_REPLACE_WITH_YOUR_TEST_SECRET
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_REPLACE_WITH_YOUR_TEST_PUBLIC_KEY
+    CHECKOUT_BASE_URL=http://localhost:3000
+
+In production, CHECKOUT_BASE_URL must be the trusted public HTTPS
+origin of this deployment. Do not use live payment keys in tests.
+The server fixes the donation amount at US$999.00 per unit, accepts
+1-20 units, and ignores price/name/image fields sent by the browser.
+Do not offer browser-editable prices without a separately reviewed
+server-side pricing policy.
+
+For verification without real Stripe calls, run npm test, npm run build,
+and use local HTTP smoke tests with the secret key unset. A passing build
+does not prove an end-to-end payment transaction.

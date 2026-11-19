@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.18.0",
-    "axios": "^0.21.4",
+    "axios": "^0.35.0",
     "next": "15.5.28",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -21,7 +21,13 @@
     "autoprefixer": "^10.3.4",
     "eslint": "8.57.1",
     "eslint-config-next": "15.5.28",
-    "postcss": "^8.3.6",
+    "postcss": "^8.5.18",
     "tailwindcss": "^2.2.15"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "$postcss"
+    },
+    "minimatch@>=7.0.0 <11.0.1": "11.0.9"
   }
 }
